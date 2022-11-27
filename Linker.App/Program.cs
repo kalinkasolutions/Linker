@@ -14,7 +14,6 @@ builder.Services.AddTransient<ILinkService, LinkService>();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.UseDefaultFiles();
