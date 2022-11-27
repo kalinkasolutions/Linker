@@ -1,0 +1,66 @@
+﻿body {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: #1C1B22;
+    flex-direction: column;
+    font-family: 'DEFAULT', sans-serif;
+    box-sizing: border-box;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+
+.addLink input {
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-color: lightgrey;
+    color: lightgrey;
+    padding: 1em;
+    background: transparent;
+}
+
+    .addLink input:focus {
+        outline: none;
+        border-bottom-color: lightgreen;
+    }
+
+.addLink button {
+    width: 100%;
+    padding: 1em;
+    background: lightgreen;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.2em;
+    margin-top: 1em;
+}
+
+    .addLink button:hover {
+        transition: all .5s ease-in;
+        background: #D5F9D5;
+    }
+
+.linkOutput {
+    width: 100%;
+    margin-top: 3em;
+}
+
+    .linkOutput a {
+        color: lightgrey
+    }
+
+        .linkOutput a:hover {
+            transition: all .5s ease-in;
+            color: lightgreen;
+        }
+#linkOutputError {
+    color: lightgrey;
+}
