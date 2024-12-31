@@ -14,8 +14,8 @@ namespace Linker.BusinessLogic.Migrations
                 name: "Links",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Redirect = table.Column<string>(type: "TEXT", nullable: true)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 7, nullable: false),
+                    Redirect = table.Column<string>(type: "TEXT", maxLength: 4096, nullable: true)
                 },
                 constraints: table =>
                 {

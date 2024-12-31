@@ -10,21 +10,23 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Linker.BusinessLogic.Migrations
 {
     [DbContext(typeof(LinkerContext))]
-    [Migration("20221126140559_Initial")]
+    [Migration("20241231135851_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("Linker.BusinessLogic.Entities.Url", b =>
+            modelBuilder.Entity("Linker.BusinessLogic.Entities.Link", b =>
                 {
                     b.Property<string>("Id")
+                        .HasMaxLength(7)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Redirect")
+                        .HasMaxLength(4096)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

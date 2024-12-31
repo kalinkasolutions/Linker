@@ -6,6 +6,16 @@ const linkOutputError = document.getElementById("linkOutputError");
 const baseUrl = window.location.href;
 
 addLinkButton.addEventListener("click", async () => {
+    await addLink();
+});
+
+linkInput.addEventListener("keyup", async (e) => {
+    if (e.key === "Enter") {
+        await addLink();
+    }
+});
+
+const addLink = async () => {
     if (!linkInput.value) {
         return;
     }
@@ -16,7 +26,7 @@ addLinkButton.addEventListener("click", async () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ Url: linkInput.value })
+            body: JSON.stringify({Url: linkInput.value})
         });
     if (response.status !== 200) {
         linkOutputError.innerHTML = "Not a valid Url";
@@ -28,5 +38,4 @@ addLinkButton.addEventListener("click", async () => {
         linkInput.value = "";
         linkOutputError.innerHTML = "";
     }
-});
-
+}

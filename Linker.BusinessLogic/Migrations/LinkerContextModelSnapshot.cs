@@ -14,14 +14,16 @@ namespace Linker.BusinessLogic.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
-            modelBuilder.Entity("Linker.BusinessLogic.Entities.Url", b =>
+            modelBuilder.Entity("Linker.BusinessLogic.Entities.Link", b =>
                 {
                     b.Property<string>("Id")
+                        .HasMaxLength(7)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Redirect")
+                        .HasMaxLength(4096)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
