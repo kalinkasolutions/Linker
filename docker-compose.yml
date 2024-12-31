@@ -1,0 +1,9 @@
+services:
+  linker:
+    container_name: linker
+    image: kalinkasolutions/linker:latest
+    restart: always
+    volumes:
+      - ./data:/var/data
+    ports:
+      - 31333:8080

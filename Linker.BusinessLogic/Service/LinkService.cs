@@ -1,46 +1,52 @@
-﻿using Linker.BusinessLogic.Entities;
+﻿using System;
+using Linker.BusinessLogic.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace Linker.BusinessLogic.Service;
 
-public class LinkService : ILinkService
+public class LinkService(DbContext context, IMemoryCache cache) : ILinkService
 {
-    private readonly DbContext m_context;
-    private const string ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    private const int SHORTEN_LENGTH = 7;
-
-    public LinkService(DbContext context)
-    {
-        m_context = context;
-    }
+    private const string Alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private const int ShortenLength = 7;
 
     public async Task<string> AddLinkAsync(string link)
     {
-        var id = await GetIdAsync();
-        while (await m_context.Set<Link>().AnyAsync(x => x.Id == id))
+        string id = await GetIdAsync();
+        while (await context.Set<Link>().AnyAsync(x => x.Id == id))
         {
             id = await GetIdAsync();
         }
 
-        await m_context.AddAsync(new Link
+        await context.AddAsync(new Link
         {
             Id = id,
             Redirect = link
         });
-        await m_context.SaveChangesAsync();
+
+        await context.SaveChangesAsync();
         return id;
     }
 
-    private async Task<string> GetIdAsync()
+    private static async Task<string> GetIdAsync()
     {
-        return await Nanoid.Nanoid.GenerateAsync(ALPHABET, SHORTEN_LENGTH);
+        return await Nanoid.Nanoid.GenerateAsync(Alphabet, ShortenLength);
     }
 
-    public async Task<string> GetLinkAsync(string id)
+    public async Task<Link> GetRedirectAsync(string id)
     {
-        var link = await m_context.Set<Link>().FirstOrDefaultAsync(x => x.Id == id);
-        return link?.Redirect ?? string.Empty;
-    }
+        if (cache.TryGetValue(id, out Link cachedLink))
+        {
+            return cachedLink;
+        }
 
+        Link link = await context.Set<Link>().FirstOrDefaultAsync(x => x.Id == id);
+        if (link != null)
+        {
+            return cache.Set(id, link, TimeSpan.FromDays(1));
+        }
+
+        return null;
+    }
 }

@@ -9,8 +9,7 @@ public class LinkerContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite("Data Source=./Linker.db");
+        optionsBuilder.UseSqlite("Data Source=/var/data/Linker.db");
         base.OnConfiguring(optionsBuilder);
     }
-
 }

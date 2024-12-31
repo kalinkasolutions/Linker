@@ -1,4 +1,8 @@
-﻿body {
+﻿html, body {
+    height: 100%;
+}
+
+body {
     width: 100%;
     display: flex;
     align-items: center;
@@ -27,10 +31,10 @@ section {
     background: transparent;
 }
 
-    .addLink input:focus {
-        outline: none;
-        border-bottom-color: lightgreen;
-    }
+.addLink input:focus {
+    outline: none;
+    border-bottom-color: lightgreen;
+}
 
 .addLink button {
     width: 100%;
@@ -43,24 +47,25 @@ section {
     margin-top: 1em;
 }
 
-    .addLink button:hover {
-        transition: all .5s ease-in;
-        background: #D5F9D5;
-    }
+.addLink button:hover {
+    transition: all .5s ease-in;
+    background: #D5F9D5;
+}
 
 .linkOutput {
     width: 100%;
     margin-top: 3em;
 }
 
-    .linkOutput a {
-        color: lightgrey
-    }
+.linkOutput a {
+    color: lightgrey
+}
 
-        .linkOutput a:hover {
-            transition: all .5s ease-in;
-            color: lightgreen;
-        }
+.linkOutput a:hover {
+    transition: all .5s ease-in;
+    color: lightgreen;
+}
+
 #linkOutputError {
     color: lightgrey;
 }
